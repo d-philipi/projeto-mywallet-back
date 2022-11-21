@@ -27,7 +27,7 @@ export async function signIn(req, res){
             userId: userExiste._id,
         });
 
-        res.send({ token });
+        res.send({ token, name: userExiste.name });
     } catch (err) {
         console.log("Erro no  controller SignIn",err);
         res.sendStatus(500);
