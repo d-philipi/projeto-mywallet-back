@@ -9,7 +9,7 @@ export async function signInValidation(req, res, next) {
         return res.status(401).send({ message: "Email ou senha incorretos!" });
     }
 
-    const passwordOk = bcrypt.compareSync(password, userExiste.password);
+    const passwordOk = bcrypt.compareSync(user.password, userExiste.password);
 
     if(!passwordOk){
         return res.status(401).send({ message: "Email ou senha incorretos!" });

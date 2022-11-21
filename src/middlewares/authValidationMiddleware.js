@@ -18,11 +18,10 @@ export async function authValidation(req, res, next) {
 
     req.user = user;
     res.locals.user = user;
+
   } catch (err) {
-    console.log(err);
     return res.sendStatus(500);
   }
-
 
   next();
 }

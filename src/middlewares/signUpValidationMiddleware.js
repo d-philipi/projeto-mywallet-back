@@ -14,7 +14,7 @@ export async function signUpValidation(req, res, next) {
     const userExiste = await usersCollection.findOne({email:user.email});
 
     if(userExiste){
-        return res.status(409).send({ message: "Esse já existente" });
+        return res.status(409).send({ message: "Usuário já existente" });
     }
 
     next();
