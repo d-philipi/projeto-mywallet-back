@@ -1,10 +1,11 @@
 import { sessionsCollection, usersCollection } from "../database/db.js";
 
 export async function authValidation(req, res, next) {
-  const { Authorization } = req.headers;
-  const token = Authorization?.replace("Bearer ", "");
+  const { authorization } = req.headers;
+  const token = authorization?.replace("Bearer ", "");
 
   if (!token) {
+    console.log("Aqui 1A", token );
     return res.sendStatus(401);
   }
 
@@ -13,6 +14,7 @@ export async function authValidation(req, res, next) {
     const user = await usersCollection.findOne({ _id: session?.userId });
 
     if (!user) {
+      console.log("Aqui 2A", user );
       return res.sendStatus(401);
     }
 

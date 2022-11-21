@@ -1,4 +1,4 @@
-import { transitionSchema } from "../models/transitionModel";
+import { transitionSchema } from "../models/transitionModel.js";
 
 export function transitionSchemaValidation(req, res, next) {
     const transition = req.body;

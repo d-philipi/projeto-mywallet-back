@@ -6,9 +6,9 @@ import { transitionSchemaValidation } from "../middlewares/transitionSchemaValid
 
 const router = Router();
 
-router.use(authValidation, transitionSchemaValidation);
+router.use(authValidation);
 
-router.post("/transitions", postTransition);
+router.post("/transitions", transitionSchemaValidation, postTransition);
 router.get("/transitions", getTransitions);
 
 
