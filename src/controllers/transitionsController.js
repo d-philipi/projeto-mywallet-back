@@ -2,30 +2,10 @@ import { transitionCollection } from "../database/db.js";
 import dayjs from 'dayjs';
 
 export async function getTransitions(req, res){
+    const user = req.user;
 
     try {
-       
-        //const transitions = await transitionCollection.find().toArray();
-        const transitions = [
-            {
-                date: dayjs().format('DD/MM'),
-                description: "Almoço com a mãe",
-                value: 100,
-                direction: false
-            },
-            {
-                date: dayjs().format('DD/MM'),
-                description: "Venda",
-                value: 200,
-                direction: true
-            },
-            {
-                date: dayjs().format('DD/MM'),
-                description: "Almoço com a mãe",
-                value: 100,
-                direction: false
-            }
-        ]
+        const transitions = await transitionCollection.find({email: user.email}).toArray();
         res.send(transitions);
 
     } catch (err) {
@@ -36,9 +16,10 @@ export async function getTransitions(req, res){
 
 export async function postTransition(req, res){
     const transition = req.body;
+    const { email } = req.user;
 
     try{
-        await transitionCollection.insertOne(transition);
+        await transitionCollection.insertOne({...transition, email, date: dayjs().format('DD/MM')});
         res.sendStatus(201);
     }catch(err){
         console.log(err);
