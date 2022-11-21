@@ -1,5 +1,5 @@
-import { signUpSchema } from "../models/usersModel";
-import { usersCollection } from "../database/db";
+import { signUpSchema } from "../models/usersModel.js";
+import { usersCollection } from "../database/db.js";
 
 export async function signUpValidation(req, res, next) {
     const user = req.body;

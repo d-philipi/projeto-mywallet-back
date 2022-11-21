@@ -1,8 +1,8 @@
 import { sessionsCollection, usersCollection } from "../database/db.js";
 
 export async function authValidation(req, res, next) {
-  const { authorization } = req.headers;
-  const token = authorization?.replace("Bearer ", "");
+  const { Authorization } = req.headers;
+  const token = Authorization?.replace("Bearer ", "");
 
   if (!token) {
     return res.sendStatus(401);
@@ -17,7 +17,6 @@ export async function authValidation(req, res, next) {
     }
 
     req.user = user;
-    res.locals.user = user;
 
   } catch (err) {
     return res.sendStatus(500);

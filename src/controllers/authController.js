@@ -11,14 +11,14 @@ export async function signUp(req, res){
         await usersCollection.insertOne({ ...user, password: hashPassword });
         res.sendStatus(201);
       } catch (err) {
-        console.log("Erro no  controller SignIn",err);
+        console.log("Erro no  controller SignUp",err);
         res.sendStatus(500);
       }
 }
 
 export async function signIn(req, res){
 
-    const { userExiste } = req.userSignIn;
+    const userExiste = req.userSignIn;
     const token = uuidV4();
 
     try {
@@ -29,7 +29,7 @@ export async function signIn(req, res){
 
         res.send({ token });
     } catch (err) {
-        console.log("Erro no  controller SignUp",err);
+        console.log("Erro no  controller SignIn",err);
         res.sendStatus(500);
     }
 }
